@@ -6,9 +6,9 @@ import com.leveloper.scottish.domain.repository.SampleRepository
 import com.leveloper.scottish.domain.usecase.UseCase
 import javax.inject.Inject
 
-class InsertTest @Inject constructor(
+class InsertSample @Inject constructor(
     private val sampleRepository: SampleRepository
-) : UseCase<Sample, InsertTest.Param>() {
+) : UseCase<Sample, InsertSample.Param>() {
 
     override suspend fun run(params: Param): Result<Sample> {
         return sampleRepository.insert(params.value)

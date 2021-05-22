@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.leveloper.library.utils.onError
 import com.leveloper.library.utils.onSuccess
 import com.leveloper.scottish.domain.model.Sample
-import com.leveloper.scottish.domain.usecase.test.InsertTest
+import com.leveloper.scottish.domain.usecase.test.InsertSample
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val insertTest: InsertTest
+    private val insertSample: InsertSample
 ) : ViewModel() {
 
     init {
@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun insertTest(value: String) {
-        insertTest(InsertTest.Param(value), viewModelScope) {
+        insertSample(InsertSample.Param(value), viewModelScope) {
             it.onSuccess(::handleSuccess).onError(::handleError)
         }
     }
