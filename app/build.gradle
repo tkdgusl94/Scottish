@@ -36,6 +36,8 @@ android {
 
 dependencies {
     implementation project(":lv-library")
+    implementation project(":domain")
+
     testImplementation project(":lv-library")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

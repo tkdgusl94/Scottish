@@ -1,7 +1,7 @@
 package com.leveloper.scottish.di
 
-import com.leveloper.scottish.repository.TestRepository
-import com.leveloper.scottish.repository.impl.TestRepositoryImpl
+import com.leveloper.scottish.domain.repository.TestRepository
+import com.leveloper.scottish.repository.TestRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

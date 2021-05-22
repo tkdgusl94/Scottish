@@ -2,6 +2,7 @@ package com.leveloper.scottish.usecase.test
 
 import com.leveloper.library.utils.Result
 import com.leveloper.scottish.UnitTest
+import com.leveloper.scottish.domain.usecase.test.InsertTest
 import com.leveloper.scottish.repository.TestRepository
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

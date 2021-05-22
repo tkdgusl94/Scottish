@@ -1,3 +1,4 @@
+include ':domain'
 include ':app'
 include ':lv-library'
 

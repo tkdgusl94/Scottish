@@ -1,8 +1,8 @@
-package com.leveloper.scottish.usecase.test
+package com.leveloper.scottish.domain.usecase.test
 
 import com.leveloper.library.utils.Result
-import com.leveloper.scottish.repository.TestRepository
-import com.leveloper.scottish.usecase.UseCase
+import com.leveloper.scottish.domain.repository.TestRepository
+import com.leveloper.scottish.domain.usecase.UseCase
 import javax.inject.Inject
 
 class InsertTest @Inject constructor(

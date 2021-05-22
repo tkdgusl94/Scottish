@@ -1,9 +1,9 @@
-package com.leveloper.scottish.repository.impl
+package com.leveloper.scottish.repository
 
 import com.leveloper.library.utils.Result
 import com.leveloper.scottish.db.entity.TestEntity
 import com.leveloper.scottish.db.dao.TestDao
-import com.leveloper.scottish.repository.TestRepository
+import com.leveloper.scottish.domain.repository.TestRepository
 import java.lang.Exception
 import javax.inject.Inject
 

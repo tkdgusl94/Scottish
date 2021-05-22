@@ -1,4 +1,4 @@
-package com.leveloper.scottish.usecase
+package com.leveloper.scottish.domain.usecase
 
 import com.leveloper.library.utils.Result
 import kotlinx.coroutines.*
