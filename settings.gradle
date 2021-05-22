@@ -1,2 +1,4 @@
 include ':app'
+include ':lv-library'
+
 rootProject.name = "Scottish"

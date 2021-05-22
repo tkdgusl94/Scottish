@@ -2,9 +2,8 @@ package com.leveloper.scottish
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.leveloper.scottish.data.LvError
-import com.leveloper.scottish.data.LvLoading
-import com.leveloper.scottish.data.LvSuccess
+import com.leveloper.library.utils.onError
+import com.leveloper.library.utils.onSuccess
 import com.leveloper.scottish.usecase.test.InsertTest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -19,17 +18,16 @@ class MainViewModel @Inject constructor(
     }
 
     private fun insertTest(value: String) {
-        val param = InsertTest.Param(value)
-        insertTest(param, viewModelScope) {
-            when (it) {
-                is LvSuccess -> {
-                    println("success: ${it.data}")
-                }
-                is LvError -> {
-                    println("error")
-                }
-                is LvLoading -> Unit
-            }
+        insertTest(InsertTest.Param(value), viewModelScope) {
+            it.onSuccess(::handleSuccess).onError(::handleError)
         }
+    }
+
+    private fun handleSuccess(value: Long) {
+        println("success: $value")
+    }
+
+    private fun handleError(e: Exception) {
+        println("error: $e")
     }
 }

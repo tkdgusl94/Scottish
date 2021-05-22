@@ -1,16 +1,16 @@
 package com.leveloper.scottish.usecase
 
-import com.leveloper.scottish.data.LvResult
+import com.leveloper.library.utils.Result
 import kotlinx.coroutines.*
 
 abstract class UseCase<out Type, in Params> where Type : Any {
 
-    abstract suspend fun run(params: Params): LvResult<Type>
+    abstract suspend fun run(params: Params): Result<Type>
 
     operator fun invoke(
         params: Params,
         scope: CoroutineScope = GlobalScope,
-        onResult: (LvResult<Type>) -> Unit = {}
+        onResult: (Result<Type>) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val deferred = async(Dispatchers.IO) {
@@ -20,5 +20,3 @@ abstract class UseCase<out Type, in Params> where Type : Any {
         }
     }
 }
-
-class None

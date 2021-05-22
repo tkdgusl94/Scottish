@@ -1,4 +1,4 @@
-package com.leveloper.scottish.db
+package com.leveloper.scottish.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

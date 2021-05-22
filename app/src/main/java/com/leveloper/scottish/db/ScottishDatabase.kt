@@ -3,6 +3,7 @@ package com.leveloper.scottish.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.leveloper.scottish.db.dao.TestDao
+import com.leveloper.scottish.db.entity.TestEntity
 
 @Database(
     entities = [

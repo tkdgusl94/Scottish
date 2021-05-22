@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.leveloper.scottish.db.ScottishDatabase
 import com.leveloper.scottish.db.dao.TestDao
-import com.leveloper.scottish.repository.TestRepository
-import com.leveloper.scottish.repository.TestRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApplicationModule {
+object DatabaseModule {
 
     private const val DB_NAME = "scottish.db"
 
@@ -33,13 +31,5 @@ object ApplicationModule {
         database: ScottishDatabase
     ): TestDao {
         return database.tripDao()
-    }
-
-    @Singleton
-    @Provides
-    fun provideTestRepository(
-        repository: TestRepositoryImpl
-    ): TestRepository {
-        return repository
     }
 }
