@@ -1,4 +1,4 @@
-package com.leveloper.scottish
+package com.leveloper.scottish.data
 
 import org.junit.Test
 

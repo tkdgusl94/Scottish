@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.leveloper.library.utils.onError
 import com.leveloper.library.utils.onSuccess
+import com.leveloper.scottish.domain.model.Sample
 import com.leveloper.scottish.domain.usecase.test.InsertTest
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun handleSuccess(value: Long) {
+    private fun handleSuccess(value: Sample) {
         println("success: $value")
     }
 

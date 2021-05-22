@@ -1,7 +1,7 @@
 package com.leveloper.scottish.di
 
-import com.leveloper.scottish.domain.repository.TestRepository
-import com.leveloper.scottish.repository.TestRepositoryImpl
+import com.leveloper.scottish.data.repository.SampleRepositoryImpl
+import com.leveloper.scottish.domain.repository.SampleRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,8 +15,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideTestRepository(
-        repository: TestRepositoryImpl
-    ): TestRepository {
+        repository: SampleRepositoryImpl
+    ): SampleRepository {
         return repository
     }
 }

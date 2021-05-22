@@ -2,8 +2,9 @@ package com.leveloper.scottish.usecase.test
 
 import com.leveloper.library.utils.Result
 import com.leveloper.scottish.UnitTest
+import com.leveloper.scottish.domain.model.Sample
+import com.leveloper.scottish.domain.repository.SampleRepository
 import com.leveloper.scottish.domain.usecase.test.InsertTest
-import com.leveloper.scottish.repository.TestRepository
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
@@ -17,7 +18,7 @@ class InsertTestTest : UnitTest() {
     private lateinit var insertTest: InsertTest
 
     @MockK
-    private lateinit var repository: TestRepository
+    private lateinit var repository: SampleRepository
 
     @Before
     fun before() {
@@ -26,7 +27,7 @@ class InsertTestTest : UnitTest() {
 
     @Test
     fun `test01 test insert, success`() {
-        coEvery { repository.insert(VALUE) } returns Result.Success(1L)
+        coEvery { repository.insert(VALUE) } returns Result.Success(Sample(1L, VALUE))
 
         runBlocking { insertTest.run(InsertTest.Param(VALUE)) }
 

@@ -2,8 +2,8 @@ package com.leveloper.scottish.di
 
 import android.content.Context
 import androidx.room.Room
-import com.leveloper.scottish.db.ScottishDatabase
-import com.leveloper.scottish.db.dao.TestDao
+import com.leveloper.scottish.data.db.ScottishDatabase
+import com.leveloper.scottish.data.db.dao.SampleDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +29,7 @@ object DatabaseModule {
     @Provides
     fun provideTestDao(
         database: ScottishDatabase
-    ): TestDao {
+    ): SampleDao {
         return database.tripDao()
     }
 }
