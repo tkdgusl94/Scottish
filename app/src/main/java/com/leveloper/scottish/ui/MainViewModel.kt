@@ -1,40 +1,41 @@
 package com.leveloper.scottish.ui
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.leveloper.library.utils.onError
-import com.leveloper.library.utils.onSuccess
-import com.leveloper.scottish.domain.model.Sample
+import androidx.lifecycle.*
+import com.leveloper.library.utils.Result
+import com.leveloper.scottish.domain.model.ChatRoom
+import com.leveloper.scottish.domain.repository.ChatRepository
 import com.leveloper.scottish.domain.usecase.test.CreateChatRoom
-import com.leveloper.scottish.domain.usecase.test.FirebaseSample
-import com.leveloper.scottish.domain.usecase.test.InsertSample
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val insertSample: InsertSample,
-    private val firebaseSample: FirebaseSample,
+    private val repository: ChatRepository,
     private val createChatRoom: CreateChatRoom
 ) : ViewModel() {
 
+    val abc: LiveData<List<ChatRoom>> = liveData {
+        emitSource(
+            repository.getAllChatRoom().asLiveData().map { result ->
+                val data = if (result is Result.Success) result.data else emptyList()
+                data
+            }
+        )
+    }
+
     init {
-//        insertTest(System.currentTimeMillis().toString())
-//        firebaseSample(Unit, viewModelScope)
-        createChatRoom(CreateChatRoom.Param("sample"), viewModelScope) {
-            println("it: $it")
-        }
-    }
-
-    private fun insertTest(value: String) = insertSample(InsertSample.Param(value), viewModelScope) {
-        it.onSuccess(::handleSuccess).onError(::handleError)
-    }
-
-    private fun handleSuccess(value: Sample) {
-        println("success: $value")
-    }
-
-    private fun handleError(e: Exception) {
-        println("error: $e")
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
+        createChatRoom(CreateChatRoom.Param(System.currentTimeMillis().toString()), viewModelScope)
     }
 }

@@ -1,22 +1,26 @@
 package com.leveloper.scottish.data.repository.source.impl
 
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
 import com.leveloper.library.utils.Result
+import com.leveloper.scottish.data.model.dto.ChatRoomDto
+import com.leveloper.scottish.data.model.dto.map
 import com.leveloper.scottish.data.repository.source.RemoteDataSource
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.suspendCancellableCoroutine
+import com.leveloper.scottish.domain.model.ChatRoom
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
-import kotlin.coroutines.resumeWithException
 
 class RemoteDataSourceImpl @Inject constructor(
-    private val fireStore: FirebaseFirestore
+    private val fireStore: FirebaseFirestore,
+    private val gson: Gson
 ) : RemoteDataSource {
 
     override suspend fun createChatRoom(name: String): Result<String> {
         return try {
-            val chatRoom = ChatRoom(name)
+            val chatRoom = ChatRoomDto(name)
 
             val result = fireStore.collection("Chat_rooms")
                 .add(chatRoom)
@@ -27,34 +31,24 @@ class RemoteDataSourceImpl @Inject constructor(
             Result.Error(e)
         }
     }
-}
 
-data class ChatRoom(
-    val name: String
-)
+    override suspend fun getAllChatRoom(): Flow<Result<List<ChatRoom>>> = flow {
+        try {
+            val current = System.currentTimeMillis()
 
-suspend fun <T> Task<T>.await(): T {
-    if (isComplete) {
-        val e = exception
-        return if (e == null) {
-            if (isCanceled) {
-                throw CancellationException("Task $this was cancelled normally.")
-            } else {
-                result!!
-            }
-        } else {
-            throw e
-        }
-    }
+            val list = fireStore.collection("Chat_rooms")
+                .orderBy("name")
+                .get()
+                .await()
+                .map {
+                    val json = gson.toJsonTree(it.data)
+                    gson.fromJson(json, ChatRoomDto::class.java).map(it.id)
+                }
 
-    return suspendCancellableCoroutine { cont ->
-        addOnCompleteListener {
-            val e = exception
-            if (e == null) {
-                if (isCanceled) cont.cancel() else cont.resume(result!!, null)
-            } else {
-                cont.resumeWithException(e)
-            }
+            println("time: ${System.currentTimeMillis() - current}")
+            emit(Result.Success(list))
+        } catch (e: Exception) {
+            emit(Result.Error(e))
         }
     }
 }

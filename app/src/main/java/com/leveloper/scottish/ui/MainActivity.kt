@@ -3,6 +3,7 @@ package com.leveloper.scottish.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.leveloper.library.utils.onSuccess
 import com.leveloper.scottish.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,6 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        vm
+        val current = System.currentTimeMillis()
+
+        vm.abc.observe(this) {
+            println("result: $it")
+            println("time: ${System.currentTimeMillis() - current}")
+        }
     }
 }
