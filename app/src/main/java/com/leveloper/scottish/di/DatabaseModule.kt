@@ -30,6 +30,6 @@ object DatabaseModule {
     fun provideTestDao(
         database: ScottishDatabase
     ): SampleDao {
-        return database.tripDao()
+        return database.sampleDao()
     }
 }

@@ -13,5 +13,5 @@ import com.leveloper.scottish.data.model.SampleEntity
     exportSchema = false
 )
 abstract class ScottishDatabase : RoomDatabase() {
-    abstract fun tripDao(): SampleDao
+    abstract fun sampleDao(): SampleDao
 }
