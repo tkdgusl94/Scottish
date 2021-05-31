@@ -2,6 +2,7 @@ package com.leveloper.scottish.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.firebase.firestore.FirebaseFirestore
 import com.leveloper.scottish.data.db.ScottishDatabase
 import com.leveloper.scottish.data.db.dao.SampleDao
 import dagger.Module
@@ -27,9 +28,13 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideTestDao(
-        database: ScottishDatabase
-    ): SampleDao {
+    fun provideTestDao(database: ScottishDatabase): SampleDao {
         return database.sampleDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFireStore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }

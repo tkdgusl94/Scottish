@@ -5,4 +5,5 @@ import com.leveloper.scottish.domain.model.Sample
 
 interface SampleRepository {
     fun insert(value: String): Result<Sample>
+    fun abc()
 }
